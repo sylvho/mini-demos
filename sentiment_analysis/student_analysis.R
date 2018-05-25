@@ -11,4 +11,6 @@ student_sentences <- c('I really like the pie you gave me this morning.',
                        )
 
 # Analyze sentiment for student sentences
+student_sentiments <- data.fram(get_sentiment(student_sentences, method='syuzhet'))
+student_analysis <- cbind(sentence = student_sentences, student_sentiments)
 

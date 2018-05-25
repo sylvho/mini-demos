@@ -27,31 +27,31 @@ rank_data<-as.numeric(rank_data)
 head(rank_data)
 
 #Using CSS selectors to scrape the title section
-
+title_data_html <- html_nodes(weboage, '.lister-item-header a')
 #html to text 
-
+title_data <- html_text(title_data_html)
 #look at data
-
+head(title_data)
 #Using CSS selectors to scrape the description section
-
+description_data_html <- html_nodes(webpage, '.ratings-bar')
 #Converting the description data to text
-
+description_data <- html_text(description_data_html)
 #look at data
-
+head(description_data)
 #Data-Preprocessing: removing '\n'
-
+description_data<-gsub("\n","",description_data)
 #Using CSS selectors to scrap the Movie runtime section
-
+runtime_data_html <- html_nodes(webpage,'.text-muted .runtime')
 #Converting the movie runtime data to text
-
+runtime_data <- html_text(runtime_data_html)
 #Let's have a look at the movie runtime
-
+head(runtime_data)
 #Data-Preprocessing: removing mins and converting it to numerical
-
+runtime_data<-gsub(" min","",runtime_data)
+runtime_data<-as.numeric(runtime_data)
 
 #Let's have another look at the runtime data
-
-
+head(rank_data)
 #Converting the genre data to text
 
 #Let's have a look at the genre

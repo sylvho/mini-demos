@@ -46,24 +46,26 @@ for (c in 1:ncol(genre_matrix)) {
 } 
 
 # Create search matrix
-
+search_matrix <- cbind(movies[,1:2], genre_matrix)
 
 # Create ratings matrix. Rows = userId, Columns = movieId
-
+# Create ratings matrix. Rows = userId, Columns = movieId
+rating_matrix <- dcast(ratings, userId~movieId, value.var = "rating", na.rm = FALSE)
 # Remove userId's
-
+rating_matrix <- as.matrix(rating_matrix[,-1])
 # Convert rating matrix into a recommenderlab sparse matrix
-
+rating_matrix <- as(rating_matrix, "realRatingMatrix")
 
 # Selecting relevant data
 # Select minimum number of users per rated movie
 # and the minimum views per user
-
+ratings_movies <- rating_matrix[rowCounts(rating_matrix) > 50, colCounts(rating_matrix) > 50]
 
 # Normalize the data
 # Remove bias instances of data 
 # Averages the rating for each user to 0
-
+normalized_ratings_movies <- normalize(ratings_movies)
+sum(rowMeans(normalized_ratings_movies) > 0.00001)
 
 
 # Define training and set data
